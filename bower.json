@@ -5,7 +5,7 @@
     "ch3rr17 <cherr.batac@gmail.com>"
   ],
   "description": "Track Budget",
-  "main": "",
+  "main": "server.js",
   "license": "MIT",
   "ignore": [
     "**/.*",
