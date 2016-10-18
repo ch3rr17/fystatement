@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Title Page</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+</head>
+
+<body ng-controller="BudgetController as vm">
+    <div class="container">
+        <div class="jumbotron">
+            <h1>Budget Tracker</h1>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Income Entries</h3>
+                    </div>
+                    <div class="panel-body">
+                        <form class="formContainer">
+                            <fieldset class="form-group">
+                                <label for="date">Date</label>
+                                <input type="date" class="form-control input-sm" data-date-format="YYYY-MM-DD" ng-model="vm.revdate">
+                            </fieldset>
+                            <fieldset class="form-group">
+                                <label for="incdesc">Description</label>
+                                <input type="text" class="form-control input-sm" ng-model="vm.revdesc">
+                            </fieldset>
+                            <fieldset class="form-group">
+                                <label for="incamount">Amount</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">$</span>
+                                    <input type="number" class="form-control" ng-model="vm.revamount">
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                    <button type="submit" class="btn btn-success" ng-click="vm.addRevenue(vm.revenue)">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Income
+                    </button>
+                    <div class="panel-footer">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Description</th>
+                                    <th>Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody ng-repeat="revenue in vm.revenues">
+                                <td>{{revenue.revdate | date:'M/d/yy'}}</td>
+                                <td>{{revenue.revdesc}}</td>
+                                <td>{{revenue.revamount | currency }}</td>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="panel panel-danger">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Expense Entries</h3>
+                    </div>
+                    <div class="panel-body">
+                        <form class="formContainer">
+                            <fieldset class="form-group">
+                                <label for="date">Date</label>
+                                <input type="date" class="form-control input-sm" ng-model="vm.expdate" required>
+                            </fieldset>
+                            <fieldset class="form-group">
+                                <label for="incdesc">Description</label>
+                                <input type="text" class="form-control input-sm" ng-model="vm.expdesc">
+                            </fieldset>
+                            <fieldset class="form-group">
+                                <label for="incamount">Amount</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">$</span>
+                                    <input type="number" class="form-control" ng-model="vm.expamount">
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                    <button type="button" class="btn btn-danger" ng-click="vm.addExpense()">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Expense
+                    </button>
+                    <div class="panel-footer">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Description</th>
+                                    <th>Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody ng-repeat="expense in vm.expenses">
+                                <td>{{expense.date | date:'M/d/yy'}}</td>
+                                <td>{{expense.description}}</td>
+                                <td>{{expense.amount | currency }}</td>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title">Summary</h3>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <strong>Total Income</strong>
+                        <p>{{vm.totalIncome | currency }}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <strong>Total Expenses</strong>
+                        <p>{{vm.totalExpense | currency }}</p>
+                    </div>
+                </div>
+                <strong>Total Balance</strong>
+                <p>{{vm.totalBalance | currency }}</p>
+            </div>
+        </div>
+    </div>
+    <!-- bower:js -->
+    
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <!-- endbower -->
+    <!-- inject:js -->
+    
+    <!-- endinject -->
+    <!-- Angular components -->
+    <script src="../bower_components/angular/angular.js"></script>
+    <!-- Angular Files -->
+    <script src="js/app.js"></script>
+    <script src="js/controllers/budget.controller.js"></script>
+    <script src="js/services/budget.service.js"></script>
+</body>
+
+</html>
