@@ -11,7 +11,9 @@
     function BudgetFactory($http, $q) {
         var service = {
             grabRevenue: grabRevenue,
-            addIncome: addIncome
+            addIncome: addIncome,
+            grabExpense: grabExpense,
+            addExpense: addExpense
         };
         return service;
 
@@ -23,7 +25,7 @@
             $http.get('/revenues')
                 .then(
                     function(response) {
-                        defer.resolve(response.data);
+                        defer.resolve(response);
                     },
                     function(error) {
                         defer.reject(err.data.message);
@@ -39,11 +41,43 @@
         	     .then(
         	     	function(response){
         	     		defer.resolve(response);
+        	     		//console.log(response);
         	     	},
         	     	function(error){
         	     		defer.reject(err.data.message);
         	     	});
         	return defer.promise;
         }
+
+        function grabExpense() {
+            var defer = $q.defer();
+
+            $http.get('/expenses')
+                .then(
+                    function(response) {
+                        defer.resolve(response);
+                    },
+                    function(error) {
+                        defer.reject(err.data.message);
+                    });
+
+            return defer.promise;
+        }
+
+        function addExpense(expense){
+            var defer = $q.defer();
+
+            $http.post('/expenses', expense)
+                 .then(
+                    function(response){
+                        defer.resolve(response);
+                    },
+                    function(error){
+                        defer.reject(err.data.message);
+                    });
+            return defer.promise;
+        }
+
+
     }
 })();

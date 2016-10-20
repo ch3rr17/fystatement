@@ -1,46 +1,45 @@
 //Dependecies
 var express = require('express');
-var Revenue = require('../models/revModel.js');
+var Expense = require('../models/expModel.js');
 
 
 //Opens App Routes
 module.exports = function(app) {
 
     //GET Routes
-    //Grabs all revenues from the table
-    app.get('/revenues', function(req, res) {
+    //Grabs all expenses from the table
+    app.get('/expenses', function(req, res) {
 
         //Uses Mongoose schema to run search
-        var query = Revenue.find({});
-        query.exec(function(err, revenues) {
+        var query = Expense.find({});
+        query.exec(function(err, expenses) {
             if (err) {
                 res.send(err);
+                console.log(err);
             }
-
             //If no errors are found, it responds with a JSON of all revenues
             else {
-                res.json(revenues);
-                console.log(revenues);
+                res.json(expenses);
+                console.log(expenses);
             }
         });
-    });    
+    });
 
     //POST Routes
-    //Adds a new revenue to the list
-    app.post('/revenues', function(req,res){
+    //Adds a new expense to the list
+    app.post('/expenses', function(req,res){
 
-        var newrevenue = new Revenue(req.body);
+        var newexpense = new Expense(req.body);
 
-        newrevenue.save(function(err){
+        newexpense.save(function(err){
             if(err){
                 res.send(err);
                 console.log('err', err);
             }
             else{
                 res.json(req.body);
-                console.log('saved!', newrevenue);
+                console.log('saved!', newexpense);
             }
         });
     });
-
 };

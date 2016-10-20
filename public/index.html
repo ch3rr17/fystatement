@@ -5,15 +5,10 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Title Page</title>
+    <title>CoBA Financial Updates</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
-            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
+    
 </head>
 
 <body ng-controller="BudgetController as vm">
@@ -31,22 +26,22 @@
                         <form class="formContainer">
                             <fieldset class="form-group">
                                 <label for="date">Date</label>
-                                <input type="date" class="form-control input-sm" data-date-format="YYYY-MM-DD" ng-model="vm.revdate">
+                                <input type="date" class="form-control input-sm" date-format="YYYY-MM-DD" ng-model="vm.revenue.revdate">
                             </fieldset>
                             <fieldset class="form-group">
                                 <label for="incdesc">Description</label>
-                                <input type="text" class="form-control input-sm" ng-model="vm.revdesc">
+                                <input type="text" class="form-control input-sm" ng-model="vm.revenue.revdesc">
                             </fieldset>
                             <fieldset class="form-group">
                                 <label for="incamount">Amount</label>
                                 <div class="input-group">
                                     <span class="input-group-addon">$</span>
-                                    <input type="number" class="form-control" ng-model="vm.revamount">
+                                    <input type="number" class="form-control" ng-model="vm.revenue.revamount">
                                 </div>
                             </fieldset>
                         </form>
                     </div>
-                    <button type="submit" class="btn btn-success" ng-click="vm.addRevenue(vm.revenue)">
+                    <button type="submit" class="btn btn-success" ng-click="vm.addRevenue()">
                         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Income
                     </button>
                     <div class="panel-footer">
@@ -76,17 +71,17 @@
                         <form class="formContainer">
                             <fieldset class="form-group">
                                 <label for="date">Date</label>
-                                <input type="date" class="form-control input-sm" ng-model="vm.expdate" required>
+                                <input type="date" class="form-control input-sm" date-format="YYYY-MM-DD" ng-model="vm.expense.expdate">
                             </fieldset>
                             <fieldset class="form-group">
                                 <label for="incdesc">Description</label>
-                                <input type="text" class="form-control input-sm" ng-model="vm.expdesc">
+                                <input type="text" class="form-control input-sm" ng-model="vm.expense.expdesc">
                             </fieldset>
                             <fieldset class="form-group">
                                 <label for="incamount">Amount</label>
                                 <div class="input-group">
                                     <span class="input-group-addon">$</span>
-                                    <input type="number" class="form-control" ng-model="vm.expamount">
+                                    <input type="number" class="form-control" ng-model="vm.expense.expamount">
                                 </div>
                             </fieldset>
                         </form>
@@ -104,9 +99,9 @@
                                 </tr>
                             </thead>
                             <tbody ng-repeat="expense in vm.expenses">
-                                <td>{{expense.date | date:'M/d/yy'}}</td>
-                                <td>{{expense.description}}</td>
-                                <td>{{expense.amount | currency }}</td>
+                                <td>{{expense.expdate | date:'M/d/yy'}}</td>
+                                <td>{{expense.expdesc}}</td>
+                                <td>{{expense.expamount | currency }}</td>
                             </tbody>
                         </table>
                     </div>

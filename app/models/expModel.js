@@ -2,22 +2,22 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-//Creates a revenue schema
-var RevenueSchema = new Schema({
-	revdate: {
+//Creates an expense schema
+var ExpenseSchema = new Schema({
+	expdate: {
 		type: Date,
 		default: Date.now,
 		required: true
 	},
-	revdesc: {
+	expdesc: {
 		type: String,
 		required: true
 	},
-	revamount: {
+	expamount: {
 		type: Number,
 		required: true
 	}
 });
 
-//Exports RevenueList Schema
-module.exports = mongoose.model('budget-revenue', RevenueSchema);
+//Exports ExpenseList Schema
+module.exports = mongoose.model('budget-expense', ExpenseSchema);
